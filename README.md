@@ -4,3 +4,36 @@ A quick way to generate API documentation from inside Unity using [doxygen](http
 Watch [this tutorial](https://youtu.be/ltJgXJjS_YQ) to get started.
 
 Note that this is a personal utility tool, not a reliably supported package (I mean just look at this shoddy README). I may make changes to the styling or code at any point without warning, so it may be best to fork this project for yourself. But hey, if you _do_ make any valuable additions, contributions are always welcome!
+
+# DoxygenGenerator - Unity command line builder
+
+## Variables
+
+| Variable | Type | Description |
+| --- | --- | --- |
+| `doxygenGenerator_DOXYGEN_PATH` | string | Doxygen install path |
+| `doxygenGenerator_INPUT_DIRECTORY` | string | Directory you would like your API to be generated from |
+| `doxygenGenerator_OUTPUT_DIRECTORY` | string | Directory you would like your API to be generated to |
+| `doxygenGenerator_PROJECT` | string | Project Settings - Name |
+| `doxygenGenerator_SYNOPSIS` | string | Project Settings - Synopsis |
+| `doxygenGenerator_VERSION` | string | Project Settings - Version |
+
+## How to use in command line (MacOS & Linux)
+
+```shell
+export doxygenGenerator_DOXYGEN_PATH=$(which doxygen)
+export doxygenGenerator_INPUT_DIRECTORY=
+export doxygenGenerator_OUTPUT_DIRECTORY=
+export doxygenGenerator_PROJECT=
+export doxygenGenerator_SYNOPSIS=
+export doxygenGenerator_VERSION=
+
+$HOME/Applications/2022.3.31f1/Unity.app/Contents/MacOS/Unity \
+-projectPath ./ \
+-logFile build.log \
+-executeMethod DoxygenGenerator.CommandLine.GenerateDocument \
+-quit \
+-accept-apiupdate \
+-batchmode \
+-nographics
+```
