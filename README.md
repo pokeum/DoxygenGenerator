@@ -37,3 +37,13 @@ $HOME/Applications/2022.3.31f1/Unity.app/Contents/MacOS/Unity \
 -batchmode \
 -nographics
 ```
+
+## Command line builder - Independent of Platform
+
+Use `cmd/DoxygenGenerator/Generator.sh`
+
+### Usage
+
+1. Copy the `cmd/DoxygenGenerator` folder into your project directory.
+2. Set up the [environment variables](#variables).
+3. Run the script `DoxygenGenerator/Generator.sh` to generate the documentation.
