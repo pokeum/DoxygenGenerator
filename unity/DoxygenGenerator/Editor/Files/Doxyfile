@@ -129,7 +129,7 @@ INLINE_INHERITED_MEMB  = NO
 # path before files name in the file list and in the header files. If set 
 # to NO the shortest path that makes the file name unique will be used.
 
-FULL_PATH_NAMES        = YES
+FULL_PATH_NAMES        = NO
 
 # If the FULL_PATH_NAMES tag is set to YES then the STRIP_FROM_PATH tag 
 # can be used to strip a user-defined part of the path. Stripping is 
@@ -520,7 +520,7 @@ SHOW_USED_FILES        = YES
 # This will remove the Files entry from the Quick Index and from the 
 # Folder Tree View (if specified). The default is YES.
 
-SHOW_FILES             = YES
+SHOW_FILES             = NO
 
 # Set the SHOW_NAMESPACES tag to NO to disable the generation of the 
 # Namespaces page.  This will remove the Namespaces entry from the Quick Index 
@@ -865,7 +865,7 @@ HTML_FILE_EXTENSION    = .html
 # have to redo this when upgrading to a newer version of doxygen or when 
 # changing the value of configuration settings such as GENERATE_TREEVIEW!
 
-HTML_HEADER            = 
+HTML_HEADER            = {{DOXYGEN_CUSTOM_PATH}}/header.html
 
 # The HTML_FOOTER tag can be used to specify a personal HTML footer for 
 # each generated HTML page. If it is left blank doxygen will generate a 
@@ -889,9 +889,18 @@ HTML_STYLESHEET        =
 # files. In the HTML_STYLESHEET file, use the file name only. Also note that 
 # the files will be copied as-is; there are no commands or markers available.
 
-HTML_EXTRA_FILES       = 
+HTML_EXTRA_FILES       = {{DOXYGEN_AWESOME_PATH}}/doxygen-awesome-darkmode-toggle.js \
+                         {{DOXYGEN_AWESOME_PATH}}/doxygen-awesome-fragment-copy-button.js \
+                         {{DOXYGEN_AWESOME_PATH}}/doxygen-awesome-paragraph-link.js \
+                         {{DOXYGEN_CUSTOM_PATH}}/toggle-alternative-theme.js \
+                         {{DOXYGEN_AWESOME_PATH}}/doxygen-awesome-interactive-toc.js \
+                         {{DOXYGEN_AWESOME_PATH}}/doxygen-awesome-tabs.js
 
-HTML_EXTRA_STYLESHEET  = 
+HTML_EXTRA_STYLESHEET  = {{DOXYGEN_AWESOME_PATH}}/doxygen-awesome.css \
+                         {{DOXYGEN_CUSTOM_PATH}}/custom.css \
+                         {{DOXYGEN_AWESOME_PATH}}/doxygen-awesome-sidebar-only.css \
+                         {{DOXYGEN_AWESOME_PATH}}/doxygen-awesome-sidebar-only-darkmode-toggle.css \
+                         {{DOXYGEN_CUSTOM_PATH}}/custom-alternative.css
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. 
 # Doxygen will adjust the colors in the stylesheet and background images 
