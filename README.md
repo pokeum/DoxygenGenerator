@@ -1,9 +1,20 @@
 # DoxygenGenerator
-A quick way to generate API documentation from inside Unity using [doxygen](https://www.doxygen.nl/index.html), with [doxygen-awesome](https://github.com/jothepro/doxygen-awesome-css) styling. Useful for generating API of your custom packages. Special thanks to [JacobPennock](https://forum.unity.com/members/jacobpennock.53178/) for the original implementation and [Brogrammar](https://forum.unity.com/members/brogrammar.1045220/) for an updated version that works with more modern versions of Unity.
+A quick way to generate API documentation from inside Unity using [doxygen](https://www.doxygen.nl/index.html), with [![doxygen-awesome-version](https://img.shields.io/badge/jothepro/doxygen--awesome--css-v2.3.4-blue?logo=github&logoColor=white)](https://github.com/jothepro/doxygen-awesome-css) styling. Useful for generating API of your custom packages.
 
-Watch [this tutorial](https://youtu.be/ltJgXJjS_YQ) to get started.
+### Usage
 
-Note that this is a personal utility tool, not a reliably supported package (I mean just look at this shoddy README). I may make changes to the styling or code at any point without warning, so it may be best to fork this project for yourself. But hey, if you _do_ make any valuable additions, contributions are always welcome!
+1. Move the [`DoxygenGenerator`](unity/DoxygenGenerator) folder into the `Assets` folder within the Unity project. You should have something like:
+
+   ```
+   MyProject
+     ├── Assets
+          └── DoxygenGenerator
+                 └── Editor
+   ```
+2. From the top menu bar in unity, navigate to **Window** > **Doxygen Generator** to open the Doxygen Generator editor window.
+
+   | <img src="image/unity_doxygen_generator_1.png"  height="400"> | <img src="image/unity_doxygen_generator_2.png"  height="400"> |
+   | -- | -- |
 
 # DoxygenGenerator - Unity command line builder
 
@@ -47,3 +58,13 @@ Use `cmd/DoxygenGenerator/Generator.sh`
 1. Copy the `cmd/DoxygenGenerator` folder into your project directory.
 2. Set up the [environment variables](#variables).
 3. Run the script `DoxygenGenerator/Generator.sh` to generate the documentation.
+
+### Tested on:
+
+- **OS:**
+   
+   ☑️ Windows    
+   ✅ MacOS    
+   ☑️ Linux    
+   
+- **Shell:** `zsh`, `bash`

@@ -42,13 +42,16 @@ cp $DOXY_FILE_SOURCE $DOXY_FILE_DESTINATION
 # Add doxygen-awesome
 mkdir -p "$doxygenGenerator_OUTPUT_DIRECTORY/html"
 
-DOXYGEN_AWESOME_SOURCE="$FILES_PATH/doxygen-awesome.css"
-DOXYGEN_AWESOME_DESTINATION="$doxygenGenerator_OUTPUT_DIRECTORY/html/doxygen-awesome.css"
-cp $DOXYGEN_AWESOME_SOURCE $DOXYGEN_AWESOME_DESTINATION
+DOXYGEN_AWESOME_SOURCE="$FILES_PATH/doxygen-awesome"
+DOXYGEN_AWESOME_DESTINATION="$doxygenGenerator_OUTPUT_DIRECTORY/html/doxygen-awesome"
 
-DOXYGEN_AWESOME_SIDEBAR_ONLY_SOURCE="$FILES_PATH/doxygen-awesome-sidebar-only.css"
-DOXYGEN_AWESOME_SIDEBAR_ONLY_DESTINATION="$doxygenGenerator_OUTPUT_DIRECTORY/html/doxygen-awesome-sidebar-only.css"
-cp $DOXYGEN_AWESOME_SIDEBAR_ONLY_SOURCE $DOXYGEN_AWESOME_SIDEBAR_ONLY_DESTINATION
+cp -r $DOXYGEN_AWESOME_SOURCE $DOXYGEN_AWESOME_DESTINATION
+
+# Add doxygen-custom
+DOXYGEN_CUSTOM_SOURCE="$FILES_PATH/doxygen-custom"
+DOXYGEN_CUSTOM_DESTINATION="$doxygenGenerator_OUTPUT_DIRECTORY/html/doxygen-custom"
+
+cp -r $DOXYGEN_CUSTOM_SOURCE $DOXYGEN_CUSTOM_DESTINATION
 
 # Update Doxyfile parameters
 declare -A map=(
@@ -57,7 +60,8 @@ declare -A map=(
   ["PROJECT_NUMBER[[:space:]]*="]="PROJECT_NUMBER         = \"$doxygenGenerator_VERSION\""
   ["INPUT[[:space:]]*="]="INPUT                  = \"$doxygenGenerator_INPUT_DIRECTORY\""
   ["OUTPUT_DIRECTORY[[:space:]]*="]="OUTPUT_DIRECTORY       = \"$doxygenGenerator_OUTPUT_DIRECTORY\""
-  ["HTML_EXTRA_STYLESHEET[[:space:]]*="]="HTML_EXTRA_STYLESHEET  = \"$DOXYGEN_AWESOME_DESTINATION\" \"$DOXYGEN_AWESOME_SIDEBAR_ONLY_DESTINATION\""
+  ["{{DOXYGEN_AWESOME_PATH}}"]="$DOXYGEN_AWESOME_DESTINATION"
+  ["{{DOXYGEN_CUSTOM_PATH}}"]="$DOXYGEN_CUSTOM_DESTINATION"
 )
 for key value in "${(@kv)map}"; do
     gsed -i "s#$key#$value#g" "$DOXY_FILE_DESTINATION"

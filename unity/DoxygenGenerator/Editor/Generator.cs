@@ -8,7 +8,7 @@ namespace DoxygenGenerator
 {
     public static class Generator
     {
-        private const string filesPath = "Packages/com.CaseyDeCoder.doxygengenerator/Editor/Files~";
+        private const string filesPath = "Assets/DoxygenGenerator/Editor/Files";
 
         public static Thread GenerateAsync()
         {
@@ -28,13 +28,14 @@ namespace DoxygenGenerator
             // Add doxygen-awesome
             Directory.CreateDirectory($"{outputDirectory}/html");
 
-            var doxygenAwesomeSource = $"{filesPath}/doxygen-awesome.css";
-            var doxygenAwesomeDestination = $"{outputDirectory}/html/doxygen-awesome.css";
-            File.Copy(doxygenAwesomeSource, doxygenAwesomeDestination, true);
+            var doxygenAwesomeSource = $"{filesPath}/doxygen-awesome";
+            var doxygenAwesomeDestination = $"{outputDirectory}/html/doxygen-awesome";
+            FileUtils.CopyFolder(doxygenAwesomeSource, doxygenAwesomeDestination, true);
 
-            var doxygenAwesomeSidebarOnlySource = $"{filesPath}/doxygen-awesome-sidebar-only.css";
-            var doxygenAwesomeSidebarOnlyDestination = $"{outputDirectory}/html/doxygen-awesome-sidebar-only.css";
-            File.Copy(doxygenAwesomeSidebarOnlySource, doxygenAwesomeSidebarOnlyDestination, true);
+            // Add doxygen-custom
+            var doxygenCustomSource = $"{filesPath}/doxygen-custom";
+            var doxygenCustomDestination = $"{outputDirectory}/html/doxygen-custom";
+            FileUtils.CopyFolder(doxygenCustomSource, doxygenCustomDestination, true);
 
             // Update Doxyfile parameters
             var doxyFileText = File.ReadAllText(doxyFileDestination);
@@ -45,8 +46,10 @@ namespace DoxygenGenerator
             doxyFileStringBuilder = doxyFileStringBuilder.Replace("PROJECT_NUMBER         =", $"PROJECT_NUMBER         = {version}");
             doxyFileStringBuilder = doxyFileStringBuilder.Replace("INPUT                  =", $"INPUT                  = \"{inputDirectory}\"");
             doxyFileStringBuilder = doxyFileStringBuilder.Replace("OUTPUT_DIRECTORY       =", $"OUTPUT_DIRECTORY       = \"{outputDirectory}\"");
-            doxyFileStringBuilder = doxyFileStringBuilder.Replace("HTML_EXTRA_STYLESHEET  =", $"HTML_EXTRA_STYLESHEET  = \"{doxygenAwesomeDestination}\" \"{doxygenAwesomeSidebarOnlyDestination}\"");
-
+            
+            doxyFileStringBuilder = doxyFileStringBuilder.Replace("{{DOXYGEN_AWESOME_PATH}}", doxygenAwesomeDestination);
+            doxyFileStringBuilder = doxyFileStringBuilder.Replace("{{DOXYGEN_CUSTOM_PATH}}", doxygenCustomDestination);
+            
             doxyFileText = doxyFileStringBuilder.ToString();
             File.WriteAllText(doxyFileDestination, doxyFileText);
 
@@ -66,9 +69,9 @@ namespace DoxygenGenerator
                     Debug.LogError($"Doxygen finsished with Error: return code {code}. Check the Doxgen Log for Errors and try regenerating your Doxyfile.");
                 }
 
-                // Read doxygen-awesome since the files are destroyed in the doxygen process
-                File.Copy(doxygenAwesomeSource, doxygenAwesomeDestination, true);
-                File.Copy(doxygenAwesomeSidebarOnlySource, doxygenAwesomeSidebarOnlyDestination, true);
+                // Read doxygen-awesome, doxygen-custom since the files are destroyed in the doxygen process
+                FileUtils.CopyFolder(doxygenAwesomeSource, doxygenAwesomeDestination, true);
+                FileUtils.CopyFolder(doxygenCustomSource, doxygenCustomDestination, true);
 
                 // Create a doxygen log file
                 var doxygenLog = doxygenOutput.ReadFullLog();
