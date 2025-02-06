@@ -59,7 +59,47 @@ Use `cmd/DoxygenGenerator/Generator.sh`
 2. Set up the [environment variables](#variables).
 3. Run the script `DoxygenGenerator/Generator.sh` to generate the documentation.
 
-### Tested on:
+### Additional feature
+
+#### Add website icon
+
+1. Modify the `DoxygenGenerator/Generator.sh` file.
+   
+   ```diff
+   +   # Add logo
+   +   LOGO_SOURCE="$FILES_PATH/logo.drawio.svg"
+   +   LOGO_DESTINATION="$doxygenGenerator_OUTPUT_DIRECTORY/html/logo.drawio.svg"
+   +   
+   +   cp -r $LOGO_SOURCE $LOGO_DESTINATION
+
+   # Update Doxyfile parameters
+   declare -A map=(
+   ```
+
+2. Save your SVG icon at the location `DoxygenGenerator/Files/logo.drawio.svg`.
+
+#### Choosing a layout
+
+There are two layout options. Choose one of them and configure Doxygen accordingly:
+
+- **Base Theme**
+
+  <img src="image/theme-variants-base.drawio.svg"  height="250">
+
+  Modify the `DoxygenGenerator/Files/Doxyfile` file.
+  
+  ```diff
+  HTML_EXTRA_STYLESHEET  = {{DOXYGEN_AWESOME_PATH}}/doxygen-awesome.css \
+                           {{DOXYGEN_CUSTOM_PATH}}/custom.css \
+  -                        {{DOXYGEN_AWESOME_PATH}}/doxygen-awesome-sidebar-only.css \
+  -                        {{DOXYGEN_AWESOME_PATH}}/doxygen-awesome-sidebar-only-darkmode-toggle.css \
+                           {{DOXYGEN_CUSTOM_PATH}}/custom-alternative.css
+  ```
+- **Sidebar-Only Theme** [ DEFAULT ]
+
+  <img src="image/theme-variants-sidebar-only.drawio.svg"  height="250">
+
+### Tested on
 
 - **OS:**
    
